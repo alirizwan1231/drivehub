@@ -67,12 +67,14 @@ export default function CarArt({
   accent,
   uid,
   className = "",
+  bare = false,
 }: {
   body: BodyStyle;
   gradient: [string, string];
   accent: string;
   uid: string;
   className?: string;
+  bare?: boolean;
 }) {
   const art = ART[body];
   const gid = `cg-${uid}`;
@@ -90,14 +92,18 @@ export default function CarArt({
         </linearGradient>
       </defs>
 
-      {/* backdrop glow panel */}
-      <rect x="6" y="10" width="708" height="220" rx="26" fill={`url(#${gid})`} />
-      <circle cx="560" cy="52" r="120" fill={accent} opacity="0.13" />
-      <circle cx="130" cy="200" r="90" fill={accent} opacity="0.08" />
+      {!bare && (
+        <>
+          {/* backdrop glow panel */}
+          <rect x="6" y="10" width="708" height="220" rx="26" fill={`url(#${gid})`} />
+          <circle cx="560" cy="52" r="120" fill={accent} opacity="0.13" />
+          <circle cx="130" cy="200" r="90" fill={accent} opacity="0.08" />
 
-      {/* ground */}
-      <ellipse cx="360" cy="205" rx="315" ry="11" fill="#000" opacity="0.55" />
-      <line x1="52" y1="203" x2="668" y2="203" stroke={accent} strokeWidth="2" opacity="0.5" />
+          {/* ground */}
+          <ellipse cx="360" cy="205" rx="315" ry="11" fill="#000" opacity="0.55" />
+          <line x1="52" y1="203" x2="668" y2="203" stroke={accent} strokeWidth="2" opacity="0.5" />
+        </>
+      )}
 
       {/* body */}
       <path d={art.body} fill={`url(#${gid}-body)`} stroke="#454a59" strokeWidth="1.5" />

@@ -106,7 +106,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0">
           <div className="glow-pulse absolute -top-40 right-[-10%] h-[560px] w-[560px] rounded-full bg-gold/15 blur-[140px]" />
           <div className="absolute bottom-0 left-[-12%] h-[420px] w-[420px] rounded-full bg-sky/10 blur-[130px]" />
-          <p className="text-stroke absolute -right-6 top-24 select-none font-display text-[19vw] font-black leading-none tracking-tighter opacity-60 lg:text-[240px]">
+          <p className="text-stroke text-drift absolute -right-6 top-24 select-none font-display text-[19vw] font-black leading-none tracking-tighter opacity-60 lg:text-[240px]">
             DUBAI
           </p>
         </div>
@@ -128,8 +128,12 @@ export default function Home() {
           </div>
 
           <div className="rise relative mt-10" style={{ "--rise-delay": "360ms" } as React.CSSProperties}>
-            <div className="car-drift">
+            <div className="glow-pulse pointer-events-none absolute -bottom-8 left-1/2 h-28 w-[72%] -translate-x-1/2 rounded-full bg-gold/25 blur-3xl" />
+            <div className="car-drift relative">
               <CarArt body={heroCar.body} gradient={heroCar.gradient} accent={heroCar.accent} uid="hero" className="block h-auto w-full" />
+            </div>
+            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[26px]">
+              <div className="scan-sweep absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-pulse/15 to-transparent" />
             </div>
             <div className="absolute bottom-5 left-5 hidden items-center gap-4 rounded-2xl border border-white/10 bg-black/50 px-5 py-3.5 backdrop-blur-md sm:flex">
               <div>
@@ -167,6 +171,77 @@ export default function Home() {
             </span>
           ))}
         </div>
+      </section>
+
+      {/* ================= CONSOLE TEASER ================= */}
+      <section className="mx-auto max-w-7xl px-5 pt-24 lg:px-8">
+        <Reveal>
+          <div className="studio-panel relative overflow-hidden rounded-[32px]">
+            <div className="grid items-center lg:grid-cols-[1fr_1.25fr]">
+              <div className="p-8 lg:p-12">
+                <p className="flex items-center gap-2.5 text-xs font-bold tracking-[0.28em] text-fog">
+                  <span className="live-dot h-2 w-2 rounded-full bg-pale" /> CARWHISPERER STUDIO — FLEET CONSOLE
+                </p>
+                <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight tracking-tight text-pale sm:text-5xl">
+                  Every car, on the <span className="font-light text-fog">turntable</span>
+                </h2>
+                <p className="mt-5 max-w-md leading-relaxed text-fog">
+                  Our ops team inspects the fleet in a virtual studio — spin any car 360°, tap
+                  through engine, exterior, interior and underbody checks, and watch returns and
+                  running costs in real time.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-2.5">
+                  {["Condition · Perfect", "Next return · 2 days", "Costs · AED 20,050/mo", "14 cars live"].map((chip) => (
+                    <span key={chip} className="rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-[11px] font-semibold tracking-wide text-pale backdrop-blur-sm">
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  href="/admin"
+                  className="group mt-8 inline-flex items-center gap-2 rounded-full bg-pale px-7 py-3.5 font-bold text-abyss transition-all hover:bg-white hover:shadow-[0_14px_45px_rgba(220,225,230,0.25)]"
+                >
+                  Enter the studio console
+                  <IconArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+
+              {/* mini studio stage */}
+              <div className="studio-stage relative overflow-hidden px-6 pb-10 pt-12">
+                <div className="pointer-events-none absolute -top-8 right-[16%] h-56 w-32 rotate-[24deg] bg-gradient-to-b from-white/12 to-transparent blur-md" />
+                <p className="absolute left-6 top-4 text-[10px] font-bold tracking-[0.24em] text-fog">STUDIO BAY 01</p>
+                <p className="absolute right-6 top-4 flex items-center gap-1.5 text-[10px] font-bold tracking-[0.24em] text-fog">
+                  <span className="live-dot h-1.5 w-1.5 rounded-full bg-pale" /> LIVE
+                </p>
+                <div className="relative mx-auto max-w-xl">
+                  <CarArt body={heroCar.body} gradient={heroCar.gradient} accent={heroCar.accent} uid="teaser" bare className="block h-auto w-full" />
+                  <span className="absolute" style={{ left: "50%", top: "34%" }}>
+                    <span className="block h-3 w-3 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full border border-pale" style={{ animationDuration: "2.4s" }} />
+                    <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pale" />
+                  </span>
+                  <span className="absolute" style={{ left: "82%", top: "52%" }}>
+                    <span className="block h-3 w-3 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full border border-pale" style={{ animationDuration: "2.4s", animationDelay: "600ms" }} />
+                    <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pale" />
+                  </span>
+                  <div className="pointer-events-none h-10 overflow-hidden opacity-25 [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden>
+                    <div className="origin-top -scale-y-100">
+                      <CarArt body={heroCar.body} gradient={heroCar.gradient} accent={heroCar.accent} uid="teaser-refl" bare className="block h-auto w-full" />
+                    </div>
+                  </div>
+                  <svg viewBox="0 0 600 110" className="pointer-events-none absolute -bottom-4 left-1/2 w-[108%] -translate-x-1/2" aria-hidden>
+                    <ellipse cx="300" cy="55" rx="292" ry="46" fill="none" stroke="rgba(220,225,230,0.14)" strokeWidth="1" />
+                    <ellipse cx="300" cy="55" rx="292" ry="46" fill="none" stroke="rgba(220,225,230,0.65)" strokeWidth="1.4" className="orbit-spin" />
+                    <circle cx="592" cy="55" r="3" fill="#dce1e6" />
+                  </svg>
+                </div>
+                <p className="mt-4 text-center font-display text-sm font-light tracking-[0.3em] text-pale">
+                  360<span className="align-top text-[9px]">°</span>
+                  <span className="ml-3 font-sans text-[10px] font-bold tracking-[0.22em] text-fog">TURNTABLE · {heroCar.name.toUpperCase()}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* ================= FEATURED FLEET RAIL ================= */}

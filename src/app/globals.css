@@ -18,6 +18,12 @@
   --color-mint: #2fce8e;
   --color-rose: #fb5e7e;
   --color-sky: #53b6ff;
+  --color-pulse: #22e6d2;
+  --color-abyss: #0b1319;
+  --color-studio: #263846;
+  --color-studio-2: #324757;
+  --color-fog: #93a3ac;
+  --color-pale: #dce1e6;
 }
 
 html {
@@ -127,4 +133,156 @@ body {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.7);
   cursor: pointer;
+}
+
+/* ---------- CarWhisperer console ---------- */
+.glass-panel {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018) 55%, rgba(34, 230, 210, 0.035));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 24px 50px -30px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(14px);
+}
+
+/* gauge needle sweep with a small overshoot settle */
+@keyframes needle-sweep {
+  0% { transform: rotate(-120deg); }
+  55% { transform: rotate(calc(var(--needle-to) + 7deg)); }
+  78% { transform: rotate(calc(var(--needle-to) - 3deg)); }
+  100% { transform: rotate(var(--needle-to)); }
+}
+.gauge-needle {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  transform: rotate(-120deg);
+  animation: needle-sweep 1.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--gauge-delay, 150ms);
+}
+
+/* gauge progress arc draw-in */
+@keyframes arc-fill {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: var(--arc-to); }
+}
+.gauge-arc {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: arc-fill 1.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--gauge-delay, 150ms);
+}
+
+/* live status dot */
+@keyframes live-ping {
+  0% { box-shadow: 0 0 0 0 rgba(34, 230, 210, 0.55); }
+  70% { box-shadow: 0 0 0 9px rgba(34, 230, 210, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 230, 210, 0); }
+}
+.live-dot { animation: live-ping 2s ease-out infinite; }
+
+/* vehicle hotspot rings (SVG geometry-property animation) */
+@keyframes hotspot-pulse {
+  0% { r: 6; opacity: 0.75; }
+  100% { r: 24; opacity: 0; }
+}
+.hotspot-ring {
+  animation: hotspot-pulse 2.4s ease-out infinite;
+  animation-delay: var(--hs-delay, 0ms);
+}
+
+/* light band sweeping down the top-view car */
+@keyframes car-scan-y {
+  0% { transform: translateY(-30px); opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateY(470px); opacity: 0; }
+}
+.car-scan { animation: car-scan-y 5.5s ease-in-out infinite; }
+
+/* animated route dashes */
+@keyframes route-flow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -140; }
+}
+.route-flow {
+  stroke-dasharray: 7 9;
+  animation: route-flow 3.2s linear infinite;
+}
+
+/* horizontal telemetry bars */
+@keyframes bar-slide {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.bar-slide {
+  transform-origin: left;
+  animation: bar-slide 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--bar-delay, 0ms);
+}
+
+/* ---------- landing hero extras ---------- */
+@keyframes scan-sweep {
+  0% { transform: translateX(-160%) skewX(-14deg); }
+  55%, 100% { transform: translateX(420%) skewX(-14deg); }
+}
+.scan-sweep { animation: scan-sweep 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+
+@keyframes text-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-26px); }
+}
+.text-drift { animation: text-drift 11s ease-in-out infinite alternate; }
+
+/* ---------- CarWhisperer studio showroom ---------- */
+.studio-panel {
+  background: linear-gradient(165deg, rgba(50, 71, 87, 0.55), rgba(38, 56, 70, 0.35) 55%, rgba(11, 19, 25, 0.5));
+  border: 1px solid rgba(220, 225, 230, 0.1);
+  box-shadow: inset 0 1px 0 rgba(220, 225, 230, 0.07), 0 24px 50px -30px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(14px);
+}
+
+.studio-stage {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 108%, rgba(147, 163, 172, 0.16), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 78% -10%, rgba(220, 225, 230, 0.1), transparent 65%),
+    linear-gradient(180deg, #101c26 0%, #0b1319 62%, #0a0f14 100%);
+}
+
+/* slow rotation of the turntable orbit dashes */
+@keyframes orbit-spin {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -260; }
+}
+.orbit-spin {
+  stroke-dasharray: 3 9;
+  animation: orbit-spin 26s linear infinite;
+}
+
+/* thin sparkline draw-in */
+@keyframes spark-draw {
+  from { stroke-dashoffset: 340; }
+  to { stroke-dashoffset: 0; }
+}
+.spark-draw {
+  stroke-dasharray: 340;
+  animation: spark-draw 2.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--spark-delay, 200ms);
+}
+
+/* staggered card entrances for the studio row */
+@keyframes card-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-up {
+  opacity: 0;
+  animation: card-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--up-delay, 0ms);
+}
+
+/* hatched segment for progress bars */
+.seg-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(220, 225, 230, 0.55) 0 5px,
+    rgba(220, 225, 230, 0.12) 5px 10px
+  );
 }
